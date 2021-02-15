@@ -45,9 +45,8 @@ class HomeController extends Controller
     public function getServicios()
     {
         $servicios = Service::all();
-        $productos = Product::all();
 
-        return view('guest.servicios', compact('servicios', 'productos'));
+        return view('guest.servicios', compact('servicios'));
     }
 
     /**
@@ -57,10 +56,9 @@ class HomeController extends Controller
      */
     public function getProductos()
     {
-        $servicios = Service::all();
         $productos = Product::all();
 
-        return view('guest.productos', compact('servicios', 'productos'));
+        return view('guest.productos', compact('productos'));
     }
 
     /**
@@ -70,10 +68,8 @@ class HomeController extends Controller
      */
     public function getLocales()
     {
-        $servicios = Service::all();
-        $productos = Product::all();
 
-        return view('guest.locales', compact('servicios', 'productos'));
+        return view('guest.locales');
     }
 
     /**
@@ -83,9 +79,16 @@ class HomeController extends Controller
      */
     public function getNosotros()
     {
-        $servicios = Service::all();
-        $productos = Product::all();
+        return view('guest.nosotros');
+    }
 
-        return view('guest.nosotros', compact('servicios', 'productos'));
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getContactanos()
+    {
+        return view('guest.contactanos');
     }
 }

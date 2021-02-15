@@ -1,23 +1,44 @@
 <x-guest-layout>
 @include('layouts.navigation')
-<main class="divide-y-2 divide-fuchsia-300">
+<main class="divide-y-2 divide-white-1">
     
-    <section class="bg-l-blue-2">
-        <section class="grid lg:grid-cols-4">
+    <section class="bg-l-blue-2 text-center px-2 sm:px-10 md:px-12 lg:px-48 xl:px-96">
+        <div class="grid grid-cols-2 md:grid-cols-3">
         @foreach ($servicios as $servicio)
             <x-icono-servicio nombre="{{ $servicio->nombre }}" icono="{{ $servicio->icono_portada }}" textAltIcono="{{ $servicio->alt_icono_portada }}" />
         @endforeach
-        </section>
+        </div>
+        <a href="{{ route('servicios') }}">
+            <button type="button" class="border border-orange-1 bg-orange-1 text-white-1 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-orange-2 focus:outline-none focus:shadow-outline">
+                Más información
+            </button>
+        </a>
     </section>
-    <section class="bg-black-300 h-48">
+
+    <section class="bg-black-1 text-white-1 text-center py-6">
+        <p class="text-2xl md:text-4xl pt-6 pb-2">¡Trabajar con nosotros es muy sencillo!</p>
+        <p class="text-xl md:text-xl py-2">El servicio adecuado con el precio justo</p>
+        <a href="{{ route('contactanos') }}">
+            <button type="button" class="border border-orange-1 bg-orange-1 text-white-1 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-orange-2 focus:outline-none focus:shadow-outline">
+                Contáctanos
+            </button>
+        </a>
+    </section>
+
+    <section class="bg-white-1 text-center px-2 md:px-6 lg:px-28">
+        <h2 class="block text-lg md:text-2xl m-4">Nuestros productos</h2>
+        <div class="bg-white-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+        @foreach ($productos as $producto)
+            <x-card-producto nombre="{{ $producto->nombre }}" imagen="{{ $producto->imagen_portada }}" textAltImagen="{{ $producto->alt_imagen_portada }}" />
+        @endforeach
+        </div>
+        <a href="{{ route('productos') }}">
+            <button class="inline-block border border-orange-1 bg-orange-1 text-white-1 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-orange-2 focus:outline-none focus:shadow-outline">
+                Ver más
+            </button>
+        </a>
 
     </section>
-    <section class="bg-white-1 grid lg:grid-cols-5">
-    @foreach ($productos as $producto)
-            <x-card-producto />
-        @endforeach
-    </section>
-    <section></section>
     
 </main>
 @include('layouts.footer')

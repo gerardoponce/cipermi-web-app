@@ -17,9 +17,10 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('nombre',100)->unique();
             $table->string('descripcion');
-            $table->string('icono_portada')->unique();
+            $table->string('icono_portada');// ->unique();
             $table->string('alt_icono_portada');
-            $table->string('video_descripcion')->unique();
+            $table->string('video_demostracion');// ->unique();
+            $table->string('video_descripcion');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ module.exports = {
                 'gray-1': '#F0F0F0',
                 'gray-2': '#BBBBBB',
                 'orange-1': '#F49B6C',
+                'orange-2': '#F5A57A',
                 'black-1': '#273F47',
             }
         },
@@ -29,5 +30,8 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio')
+    ],
 };

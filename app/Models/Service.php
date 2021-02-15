@@ -19,6 +19,7 @@ class Service extends Model
         'descripcion',
         'icono_portada',
         'alt_icono_portada',
+        'video_demostracion',
         'video_descripcion'
     ];
     

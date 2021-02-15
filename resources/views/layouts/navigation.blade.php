@@ -9,23 +9,48 @@ $opciones = [
 
 @endphp
 <header class="lg:relative">
-    <section class="hidden lg:block max-w-xl">
-        <img class="object-cover" src="https://images.pexels.com/photos/1274260/pexels-photo-1274260.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Flower and sky"/>
-    </section>
+
+    <div class="hidden lg:block" x-data="{items: ['Slide 1','Slide 2','Slide 3','Slide 4'], active: 0}">
+        <div class="snap overflow-auto relative flex-no-wrap flex transition-all" x-ref="slider"
+            x-on:scroll.debounce="active = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / items.length))">
+            <template x-for="(item,index) in items" :key="index">
+                <div class="w-full flex-shrink-0 h-96 bg-black text-white flex items-center justify-center">
+                    <span x-text="item"></span>
+                </div>
+            </template>
+        </div>
+        <div class="p-4 flex items-center justify-center flex-1 bg-l-blue-2">
+            <button
+                class="outline-none focus:outline-none rounded-full mx-4 text-white-1"
+                x-on:click=" $refs.slider.scrollLeft = $refs.slider.scrollLeft - ($refs.slider.scrollWidth / items.length)">
+                <
+            </button>
+            <template x-for="(item,index) in items" :key="index">
+                <span class="bg-white-1 w-5 h-2 block mx-1 bg-opacity-25 shadow"
+                x-bind:class="{'bg-opacity-100': active === index }"></span>
+            </template>
+            <button
+                class="outline-none focus:outline-none rounded-full mx-4 text-white-1"
+                x-on:click="$refs.slider.scrollLeft = $refs.slider.scrollLeft + ($refs.slider.scrollWidth / items.length)">
+                >
+            </button>
+        </div>
+    </div>
+
     <nav x-data="{ open: false }" class="bg-white-1 sm:mx-auto md:rounded-none lg:rounded-lg lg:max-w-4xl xl:max-w-6xl lg:mt-20 lg:absolute lg:left-0 lg:top-0 lg:right-0">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between sm:justify-center h-16 sm:h-24">
                 <div class="flex justify-between">
                     <!-- Logo -->
-                    <div class="flex-shrink-0 flex items-center">
+                    <div class="flex-shrink-0 flex items-center font-bold">
                         @auth
                         <a href="{{ route('admin') }}">
-                            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                            <h2 class="block-inline ml-4 px-1 text-2xl md:text-4xl">Cipermi Admin</h2>
                         </a>
                         @else
                         <a href="{{ route('inicio') }}">
-                            <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                            <h2 class="block-inline ml-4 px-1 text-2xl md:text-4xl">Cipermi</h2>
                         </a>
                         @endauth
                     </div>
@@ -129,7 +154,51 @@ $opciones = [
             @endauth
         </div>
     </nav>
-    <section class="lg:hidden max-w-xl">
-        <img class="object-cover" src="https://images.pexels.com/photos/1274260/pexels-photo-1274260.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Flower and sky"/>
-    </section>
+
+    <div class="lg:hidden lg:block" x-data="{items: ['Slide 1','Slide 2','Slide 3','Slide 4'], active: 0}">
+        <div class="snap overflow-auto relative flex-no-wrap flex transition-all" x-ref="slider"
+            x-on:scroll.debounce="active = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / items.length))">
+            <template x-for="(item,index) in items" :key="index">
+                <div class="w-full flex-shrink-0 h-96 bg-black text-white flex items-center justify-center">
+                    <span x-text="item"></span>
+                </div>
+            </template>
+        </div>
+        <div class="p-4 flex items-center justify-center flex-1 bg-l-blue-2">
+            <button
+                class="outline-none focus:outline-none rounded-full mx-4 text-white"
+                x-on:click=" $refs.slider.scrollLeft = $refs.slider.scrollLeft - ($refs.slider.scrollWidth / items.length)">
+                <
+            </button>
+            <template x-for="(item,index) in items" :key="index">
+                <span class="bg-white-1 w-5 h-2 block mx-1 bg-opacity-25 shadow"
+                x-bind:class="{'bg-opacity-100': active === index }"></span>
+            </template>
+            <button
+                class="outline-none focus:outline-none rounded-full mx-4 text-white"
+                x-on:click="$refs.slider.scrollLeft = $refs.slider.scrollLeft + ($refs.slider.scrollWidth / items.length)">
+                >
+            </button>
+        </div>
+    </div>
+
+
+    <style>
+    .snap {
+        -ms-scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;/*  To Firefox */
+        scrollbar-width: none;
+    }
+    /*  To Chromium */
+    .snap::-webkit-scrollbar {
+        display: none;
+    }
+
+    .snap > div {
+        scroll-snap-align: center;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </header>

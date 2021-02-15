@@ -17,11 +17,13 @@
 
 
     </head>
-    <body class="font-sans antialiased bg-gray-500">
+    <body class="font-sans antialiased">
         <div class="min-h-screen">
             {{ $slot }}
         </div>
     </body>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/de17adf649.js" crossorigin="anonymous"></script>
+
 </html>

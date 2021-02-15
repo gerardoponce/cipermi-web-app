@@ -17,6 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('nombre',100)->unique();
             $table->string('descripcion');
+            $table->string('imagen_portada');// ->unique();
+            $table->string('alt_imagen_portada');
             $table->timestamps();
         });
     }
