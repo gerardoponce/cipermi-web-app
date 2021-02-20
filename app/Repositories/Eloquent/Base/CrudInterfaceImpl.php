@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Eloquent\Base;
 
-use App\Repositories\Eloquent\CrudInterface; 
+use App\Repositories\Eloquent\Base\CrudInterface; 
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;

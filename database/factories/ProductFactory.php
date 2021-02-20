@@ -21,10 +21,14 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $image = "img/app/image-640x480.png";
+    
+        $imagePath = 'storage/' . $image;
+
         return [
             'nombre' => $this->faker->unique()->words($nb = 3, $asText = true),
             'descripcion' => $this->faker->text($maxNbChars = 200),
-            'imagen_portada' => "https://via.placeholder.com/640x480.png/",// $this->faker->imageUrl($width = 640, $height = 480),
+            'imagen_portada' => $imagePath,// $this->faker->imageUrl($width = 640, $height = 480),
             'alt_imagen_portada' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
         ];
     }

@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Repositories\Eloquent\CrudInterface;
-use App\Repositories\Eloquent\CrudInterfaceImpl;
+use App\Repositories\Eloquent\Base\CrudInterface;
+use App\Repositories\Eloquent\Base\CrudInterfaceImpl;
 use App\Repositories\Interfaces\ProductRepositoryIntf;
 use App\Repositories\Interfaces\ServiceRepositoryIntf;
-use App\Repositories\ProductRepositoryImpl;
-use App\Repositories\ServiceRepositoryImpl;
+use App\Repositories\Eloquent\ProductRepositoryImpl;
+use App\Repositories\Eloquent\ServiceRepositoryImpl;
 
 
 use Illuminate\Support\ServiceProvider;

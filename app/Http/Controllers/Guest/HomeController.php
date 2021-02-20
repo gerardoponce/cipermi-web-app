@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Service;
+use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\ProductRepositoryIntf;
 use App\Repositories\Interfaces\ServiceRepositoryIntf;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
@@ -29,10 +30,8 @@ class HomeController extends Controller
      */
     public function getHome()
     {
-        //$servicios = Service::all();
-        $servicios = $this->serviceRepository->all();
-        $productos = $this->productRepository->all();
-        //$productos = Product::all();
+        $servicios = $this->serviceRepository->getNombreIcono();
+        $productos = $this->productRepository->getNombreImagen();
 
         return view('guest.home', compact('servicios', 'productos'));
     }
@@ -44,8 +43,28 @@ class HomeController extends Controller
      */
     public function getServicios()
     {
-        $servicios = Service::all();
+        $serviciosAux = $this->serviceRepository->getNombreDescripcionVideo();
+        $serviciosUno = new Collection;
+        $serviciosDos = new Collection;
 
+        for ($i=0; $i < $serviciosAux->count(); $i = $i + 2) { 
+            $serviciosUno->push($serviciosAux[$i]);
+        };
+
+        for ($i=1; $i <= $serviciosAux->count(); $i = $i + 2) { 
+            $serviciosDos->push($serviciosAux[$i]);
+        };
+
+        $serviciosUno->map(function ($servicio) {
+            return $servicio->estado = 0;
+        });
+        
+        $serviciosDos->map(function ($servicio) {
+            return $servicio->estado = 1;
+        });
+
+        $servicios = $serviciosAux;
+        
         return view('guest.servicios', compact('servicios'));
     }
 
@@ -56,7 +75,7 @@ class HomeController extends Controller
      */
     public function getProductos()
     {
-        $productos = Product::all();
+        $productos = $this->productRepository->getNombreDescripcionImagen();
 
         return view('guest.productos', compact('productos'));
     }
@@ -91,4 +110,5 @@ class HomeController extends Controller
     {
         return view('guest.contactanos');
     }
+
 }
