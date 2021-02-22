@@ -1,13 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ServiceResource;
 use App\Models\Service;
+use App\Repositories\Interfaces\ServiceRepositoryIntf;
+
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    private $serviceRepository;
+
+    public function __construct(ServiceRepositoryIntf $serviceRepository)
+    {
+        $this->serviceRepository = $serviceRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = $this->serviceRepository->all();
+        return ServiceResource::collection($services);
     }
 
     /**
