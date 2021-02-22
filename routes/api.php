@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/servicios', [ServiceController::class, 'index']);
+Route:: middleware ('auth:sanctum')->get('/servicios', [ServiceController::class, 'index']);
