@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Api\ServiceController;
+use App\Http\Controllers\Admin\Api\ProductController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +20,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route:: middleware ('auth:sanctum')->get('/servicios', [ServiceController::class, 'index']);
+Route::get('/productos', [ProductController::class, 'index']);
+
+Route::get('/productos/{product:codigo}', [ProductController::class, 'show']);
+
+Route::post('/productos', [ProductController::class, 'store']);
+
+Route::put('/productos/{product:codigo}', [ProductController::class, 'update']);
+
+Route::delete('/productos/{product:codigo}', [ProductController::class, 'destroy']);
+
+
+
+Route::fallback(function(){
+    return response()->json([
+        'mensaje' => 'Ruta no encontrada. Si persiste, contactarse con su proveedor.'], 404);
+});

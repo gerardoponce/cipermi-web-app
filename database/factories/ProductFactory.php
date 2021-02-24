@@ -23,11 +23,13 @@ class ProductFactory extends Factory
     {
         $image = "img/app/image-640x480.png";
     
-        $imagePath = 'storage/' . $image;
+        $imagePath = asset('storage/' . $image);
 
         return [
+            'codigo' => $this->faker->uuid(),
             'nombre' => $this->faker->unique()->words($nb = 3, $asText = true),
             'descripcion' => $this->faker->text($maxNbChars = 200),
+            'stock' => rand(0, 200),
             'imagen_portada' => $imagePath,// $this->faker->imageUrl($width = 640, $height = 480),
             'alt_imagen_portada' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
         ];

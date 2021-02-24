@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -14,6 +15,20 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        
+        $fechaCreacion = Carbon::parse($this->created_at)->tz('America/Lima')->isoFormat('DD-MM-YYYY');
+        $fechaActualizacion = Carbon::parse($this->updated_at)->tz('America/Lima')->isoFormat('DD-MM-YYYY, H:mm:ss');
+
+        return [
+            'id' => $this->id,
+            'codigo' => $this->codigo,
+            'nombre' => $this->nombre,
+            'descripcion' => $this->descripcion,
+            'stock' => $this->stock,
+            'imagen_portada' => $this->imagen_portada,
+            'alt_imagen_portada' => $this->alt_imagen_portada,
+            'fecha_creacion' =>  $fechaCreacion,
+            'fecha_actualizacion' => $fechaActualizacion
+        ];
     }
 }

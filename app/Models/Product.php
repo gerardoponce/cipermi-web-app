@@ -15,8 +15,10 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'codigo',
         'nombre',
         'descripcion',
+        'stock',
         'imagen_portada',
         'alt_imagen_portada'
     ];

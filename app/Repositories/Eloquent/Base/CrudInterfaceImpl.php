@@ -30,23 +30,23 @@ class CrudInterfaceImpl implements CrudInterface
         return $this->model->all();    
     }
 
+    public function find(Model $model): Model
+    {
+        return $model;
+    }
+
     public function create(array  $data): Model
     {
         return $this->model->create($data);
     }
 
-    // public function update(array $data, $id)
-    // {
+    public function update(array $data, Model $model): bool
+    {
+        return $model->update($data);
+    }
 
-    // }
-
-    // public function delete($id)
-    // {
-
-    // }
-
-    // public function find($id)
-    // {
-
-    // }
+    public function delete(Model $model): bool
+    {
+        return $model->delete($model);
+    }
 }

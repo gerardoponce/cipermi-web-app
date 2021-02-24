@@ -9,12 +9,12 @@ interface CrudInterface
 {
     public function all(): Collection;
 
+    public function find(Model $model): Model;
+
     public function create(array  $data): Model;
 
-    // public function update(array $data, $id);
+    public function update(array $data, Model $model): bool;
 
-    // public function delete($id);
-
-    // public function find($id);
+    public function delete(Model $model): bool;
 
 }
