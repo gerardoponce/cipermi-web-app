@@ -20,17 +20,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/productos', [ProductController::class, 'index']);
+Route::namespace('Producto')->group(function () {
 
-Route::get('/productos/{product:codigo}', [ProductController::class, 'show']);
+    Route::get('/productos', [ProductController::class, 'index']);
 
-Route::post('/productos', [ProductController::class, 'store']);
+    Route::get('/productos/{product:codigo}', [ProductController::class, 'show']);
 
-Route::put('/productos/{product:codigo}', [ProductController::class, 'update']);
+    Route::post('/productos', [ProductController::class, 'store']);
 
-Route::delete('/productos/{product:codigo}', [ProductController::class, 'destroy']);
+    Route::put('/productos/{product:id}', [ProductController::class, 'update']);
 
+    Route::delete('/productos/{product:codigo}', [ProductController::class, 'destroy']);
 
+});
 
 Route::fallback(function(){
     return response()->json([

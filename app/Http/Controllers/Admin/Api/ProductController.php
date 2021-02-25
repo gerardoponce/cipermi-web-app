@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProductRequest;
+use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Repositories\Interfaces\ProductRepositoryIntf;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -40,9 +42,34 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $productJson = $this->productRepository->create($request->all());
 
-        return (new ProductResource($productJson))->response()->setStatusCode(201);
+        $folder = 'img/products';
+        $url = '';
+
+        if($request->hasFile('imagen_portada')) {
+
+            // Upload image
+            $image = $request->file('imagen_portada');
+
+            $image_path = $image->store($folder, 'public');
+
+            $url = Storage::disk('public')->url($image_path);
+            
+        }
+        else {
+            // Upload default image if it's null
+            $image = 'img/app/image-640x480.png';
+            
+            $url = Storage::disk('public')->url($image);
+        }
+
+        $customRequest = $request->all();
+
+        $customRequest['imagen_portada'] = $url;
+
+        $productJson = $this->productRepository->create($customRequest);
+        
+        return response()->json(['mensaje' => $productJson])->setStatusCode(200);
     }
 
     /**
@@ -65,9 +92,32 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $productJson = $this->productRepository->update($request->all(), $product);
+        $folder = 'img/products';
+        $url = '';
+        $customRequest = $request->all();
+
+        if ($request->filled('imagen_portada') && $request->hasFile('imagen_portada')) {
+
+            // Upload image
+            $image = $request->file('imagen_portada');
+
+            $image_path = $image->store($folder, 'public');
+
+            $url = Storage::disk('public')->url($image_path);
+
+            Storage::disk('public')->delete($product->imagen_portada);
+
+            $customRequest['imagen_portada'] = $url;
+        }
+        else {
+
+            $url = $product->imagen_portada;
+            $customRequest['imagen_portada'] = $url;
+        }
+
+        $productJson = $this->productRepository->update($customRequest, $product);
 
         return response()->json(['mensaje' => $productJson])->setStatusCode(200);
     }

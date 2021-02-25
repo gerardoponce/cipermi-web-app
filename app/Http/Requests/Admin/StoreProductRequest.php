@@ -26,7 +26,10 @@ class StoreProductRequest extends FormRequest
         return [
             'codigo' => 'required|string|unique:products',
             'nombre' => 'required|string|unique:products',
-            'stock' => 'min:0',
+            'descripcion' => 'nullable|string',
+            'stock' => 'required|numeric|min:0',
+            'imagen_portada' => 'nullable|image:jpeg,png,jpg,gif,svg|max:2048',
+            'alt_imagen_portada' => 'nullable'
         ];
     }
 }
