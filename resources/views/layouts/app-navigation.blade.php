@@ -1,79 +1,47 @@
 @php
 $opciones = [
-    ['Inicio', 'inicio'], 
-    ['Servicios', 'servicios'],
-    ['Productos', 'productos'],
-    ['Locales', 'locales'],
-    ['Nosotros', 'nosotros']
-    ];
+    ['Productos', 'inicio'],
+];
 
 @endphp
-<header class="lg:relative">
-
-    <div class="hidden lg:block" x-data="{items: ['storage/img/app/logo-1.jpg','storage/img/app/logo-2.jpg'], active: 0}">
-        <div class="snap overflow-auto relative flex-no-wrap flex transition-all" x-ref="slider"
-            x-on:scroll.debounce="active = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / items.length))">
-            <template x-for="(item,index) in items" :key="index">
-                <div class="w-full flex-shrink-0 h-96 bg-black text-white flex items-center justify-center">
-                    <img :src="item" class="object-cover min-w-full h-full">
-                </div>
-            </template>
-        </div>
-        <div class="p-4 flex items-center justify-center flex-1 lg:absolute lg:left-0 lg:bottom-0 lg:right-0">
-            <button
-                class="outline-none focus:outline-none rounded-full mx-4 text-white-1"
-                x-on:click=" $refs.slider.scrollLeft = $refs.slider.scrollLeft - ($refs.slider.scrollWidth / items.length)">
-                <
-            </button>
-            <template x-for="(item,index) in items" :key="index">
-                <span class="bg-white-1 w-5 h-2 block mx-1 bg-opacity-25 shadow"
-                x-bind:class="{'bg-opacity-100': active === index }"></span>
-            </template>
-            <button
-                class="outline-none focus:outline-none rounded-full mx-4 text-white-1"
-                x-on:click="$refs.slider.scrollLeft = $refs.slider.scrollLeft + ($refs.slider.scrollWidth / items.length)">
-                >
-            </button>
-        </div>
-    </div>
-
-    <nav x-data="{ open: false }" class="bg-white-1 sm:mx-auto md:rounded-none lg:rounded-lg lg:max-w-5xl xl:max-w-7xl lg:mt-20 lg:absolute lg:left-0 lg:top-0 lg:right-0 lg:px-6">
+<header class="">
+    <nav x-data="{ open: false }" class="bg-white-1 lg:px-6">
         <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 sm:h-24">
 
-                    <!-- Logo -->
-                    <section class="flex-shrink-0 flex justify-start sm:justify-center md:justify-start items-center font-bold">
-                        @auth
-                        <a href="{{ route('admin') }}">
-                            <h2 class="block-inline ml-4 px-1 text-2xl md:text-4xl">Cipermi Admin</h2>
-                        </a>
-                        @else
-                        <a href="{{ route('inicio') }}">
-                            <h2 class="block-inline ml-4 px-1 text-2xl md:text-4xl">Cipermi</h2>
-                        </a>
-                        @endauth
-                    </section>
+                <!-- Logo -->
+                <section class="flex-shrink-0 flex justify-start sm:justify-center md:justify-start items-center font-bold">
+                    <a href="{{ route('admin') }}">
+                        <h2 class="block-inline ml-4 px-1 text-2xl md:text-4xl">Cipermi Admin</h2>
+                    </a>
+                </section>
 
-                    <!-- Navigation Links -->
-                    <section class="flex justify-between sm:space-x-2 sm:justify-center md:space-x-4 md:justify-around lg:space-x-6 items-center">
-                        @foreach ($opciones as $opcion)
-                            <div class="hidden sm:flex">
-                                <x-nav-link :href="route($opcion[1])" :active="request()->routeIs($opcion[1])">
-                                    {{ $opcion[0] }}
-                                </x-nav-link>
-                            </div>
-                        @endforeach
+                <!-- Navigation Links -->
+                <section class="flex justify-between sm:space-x-2 sm:justify-center md:space-x-4 md:justify-around lg:space-x-6 items-center">
+                    @foreach ($opciones as $opcion)
+                        <div class="hidden sm:flex">
+                            <x-nav-link :href="route($opcion[1])" :active="request()->routeIs($opcion[1])">
+                                {{ $opcion[0] }}
+                            </x-nav-link>
+                        </div>
+                    @endforeach
 
-                        <a href="{{ route('login') }}" class="hidden sm:flex text-xs md:text-sm lg:text-base">
+                    @auth
+                        <a href="{{ route('inicio') }}" class="hidden sm:flex text-xs md:text-sm lg:text-base">
                             <button class="bg-orange-2 border-2 border-orange-2 text-white rounded-md px-4 py-2 my-4 transition duration-500 ease select-none hover:bg-white-1 hover:text-l-blue-3 hover:border-l-blue-3 focus:outline-none focus:shadow-outline">
-                                Iniciar sesión
+                                Invitado
                             </button>
                         </a>
-                    </section>
+                    @else
+                        <a href="{{ route('admin') }}" class="hidden sm:flex text-xs md:text-sm lg:text-base">
+                            <button class="bg-orange-2 border-2 border-orange-2 text-white rounded-md px-4 py-2 my-4 transition duration-500 ease select-none hover:bg-white-1 hover:text-l-blue-3 hover:border-l-blue-3 focus:outline-none focus:shadow-outline">
+                                Admin
+                            </button>
+                        </a>
+                    @endauth
+                </section>
 
-
-                @auth
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <x-dropdown align="right" width="48">
@@ -104,7 +72,6 @@ $opciones = [
                         </x-slot>
                     </x-dropdown>
                 </div>
-                @endauth
 
                 <!-- Hamburger -->
                 <div class="-mr-2 flex items-center sm:hidden">
@@ -115,6 +82,7 @@ $opciones = [
                         </svg>
                     </button>
                 </div>
+
             </div>
         </div>
 
@@ -142,8 +110,8 @@ $opciones = [
                     </button>
                 </a>
             </div>
+            
             <!-- Responsive Settings Options -->
-            @auth
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div class="flex-shrink-0">
@@ -171,53 +139,8 @@ $opciones = [
                     </form>
                 </div>
             </div>
-            @endauth
         </div>
+
     </nav>
 
-    <div class="lg:hidden" x-data="{items: ['storage/img/app/logo-1.jpg','storage/img/app/logo-2.jpg'], active: 0}">
-        <div class="snap overflow-auto relative flex-no-wrap flex transition-all" x-ref="slider"
-            x-on:scroll.debounce="active = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / items.length))">
-            <template x-for="(item,index) in items" :key="index">
-                <div class="w-full flex-shrink-0 h-96 bg-black text-white flex items-center justify-center">
-                    <img :src="item" class="object-cover min-w-full h-full">
-                </div>
-            </template>
-        </div>
-        <div class="p-4 flex items-center justify-center flex-1 absolute -mt-20 left-0 right-0">
-            <button
-                class="outline-none focus:outline-none rounded-full mx-4 text-white-1"
-                x-on:click=" $refs.slider.scrollLeft = $refs.slider.scrollLeft - ($refs.slider.scrollWidth / items.length)">
-                <
-            </button>
-            <template x-for="(item,index) in items" :key="index">
-                <span class="bg-white-1 w-5 h-2 block mx-1 bg-opacity-25 shadow"
-                x-bind:class="{'bg-opacity-100': active === index }"></span>
-            </template>
-            <button
-                class="outline-none focus:outline-none rounded-full mx-4 text-white-1"
-                x-on:click="$refs.slider.scrollLeft = $refs.slider.scrollLeft + ($refs.slider.scrollWidth / items.length)">
-                >
-            </button>
-        </div>
-    </div>
-
-
-    <style>
-    .snap {
-        -ms-scroll-snap-type: x mandatory;
-        scroll-snap-type: x mandatory;
-        -ms-overflow-style: none;
-        scroll-behavior: smooth;/*  To Firefox */
-        scrollbar-width: none;
-    }
-    /*  To Chromium */
-    .snap::-webkit-scrollbar {
-        display: none;
-    }
-
-    .snap > div {
-        scroll-snap-align: center;
-    }
-    </style>
 </header>

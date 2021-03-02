@@ -1,3 +1,21 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .snap {
+        -ms-scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;/*  To Firefox */
+        scrollbar-width: none;
+    }
+    /*  To Chromium */
+    .snap::-webkit-scrollbar {
+        display: none;
+    }
+
+    .snap > div {
+        scroll-snap-align: center;
+    }
+}

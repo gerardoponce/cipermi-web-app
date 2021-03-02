@@ -20,6 +20,11 @@ module.exports = {
                 'orange-1': '#F49B6C',
                 'orange-2': '#F5A57A',
                 'black-1': '#273F47',
+            },
+            minHeight: {
+                '56': '14rem',
+                '96': '24rem',
+                '102': '30rem' 
             }
         },
     },

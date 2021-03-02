@@ -19,7 +19,14 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen">
+            <!-- Page Heading -->
+            {{ $header }}
+
+            <!-- Page Content -->
             {{ $slot }}
+
+            <!-- Page Footer -->
+            @include('layouts.footer')
         </div>
     </body>
     <!-- Scripts -->

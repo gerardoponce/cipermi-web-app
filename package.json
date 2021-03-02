@@ -21,6 +21,7 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
+        "@kevinbatdorf/alpine-auto-interval": "github:kevinbatdorf/alpine-auto-interval",
         "@tailwindcss/aspect-ratio": "^0.2.0"
     }
 }
