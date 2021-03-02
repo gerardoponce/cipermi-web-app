@@ -28,9 +28,7 @@
             <!-- Page Footer -->
             @include('layouts.footer')
         </div>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/de17adf649.js" crossorigin="anonymous"></script>
-
 </html>

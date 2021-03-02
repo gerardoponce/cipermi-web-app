@@ -14,6 +14,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @livewireStyles
 
     </head>
     <body class="font-sans antialiased">
@@ -29,7 +30,8 @@
             <!-- Page Footer -->
             @include('layouts.footer')
         </div>
+        <!-- Scripts -->
+         <script src="{{ asset('js/app.js') }}" defer></script>
+        @livewireScripts
     </body>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </html>
