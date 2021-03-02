@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Api\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('admin');
+
+Route::get('/admin/productos', [ProductController::class, 'index'])
+            ->middleware('auth')
+            ->name('admin.product.index');
+
+Route::post('/admin/productos', [ProductController::class, 'store'])
+            ->middleware('auth')
+            ->name('admin.product.store');
 
 require __DIR__.'/auth.php';
 

@@ -1,6 +1,6 @@
 @php
 $opciones = [
-    ['Productos', 'inicio'],
+    ['Productos', 'admin.product.index'],
 ];
 
 @endphp
