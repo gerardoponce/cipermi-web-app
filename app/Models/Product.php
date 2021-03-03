@@ -19,6 +19,7 @@ class Product extends Model
         'nombre',
         'descripcion',
         'stock',
+        'precio',
         'imagen_portada',
         'alt_imagen_portada'
     ];

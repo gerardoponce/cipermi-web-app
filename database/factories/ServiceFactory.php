@@ -31,7 +31,7 @@ class ServiceFactory extends Factory
         $urlVideo = Storage::disk('public')->url($video);
 
         return [
-            'nombre' => $this->faker->unique()->words($nb = 3, $asText = true),
+            'nombre' => $this->faker->unique()->words($nb = 10, $asText = true),
             'descripcion' => $this->faker->text($maxNbChars = 200),
             'icono_portada' => $urlImage,// $this->faker->imageUrl($width = 640, $height = 480),
             'alt_icono_portada' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),

@@ -26,7 +26,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'codigo' => [
-                'required', 'string',
+                'required', 'integer', 'min:1',
                 Rule::unique('products', 'codigo')->ignore($this->product),
             ],
             'nombre' => [

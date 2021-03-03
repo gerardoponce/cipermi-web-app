@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Repositories\Eloquent\Base\CrudInterfaceImpl;
 use App\Repositories\Interfaces\ProductRepositoryIntf;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductRepositoryIntf
@@ -35,7 +36,7 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
         return $products;
     }
 
-        /**
+    /**
      * Show a list of products.
      *
      * @return \Illuminate\Http\Response
@@ -43,8 +44,25 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
     public function getNombreDescripcionImagen(): Collection
     {
         $products = $this->model
-                        ->select('nombre','descripcion', 'imagen_portada', 'alt_imagen_portada')
+                        ->select('nombre', 'descripcion', 'imagen_portada', 'alt_imagen_portada')
                         ->get();
+
+        return $products;
+    }
+
+    /**
+     * Show a list of products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $perPage): LengthAwarePaginator
+    {
+        $products = $this->model
+                        ->select('codigo', 'nombre', 'stock', 'precio', 'updated_at')
+                        ->where('codigo', 'LIKE', "%{$search}%")
+                        ->orWhere('nombre', 'LIKE', "%{$search}%")
+                        ->orderBy('codigo', 'asc')
+                        ->paginate($perPage);
 
         return $products;
     }

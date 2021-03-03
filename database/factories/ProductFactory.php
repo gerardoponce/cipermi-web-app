@@ -27,10 +27,11 @@ class ProductFactory extends Factory
         $url = Storage::disk('public')->url($image);
 
         return [
-            'codigo' => 'PD' . $this->faker->unique()->randomDigitNotNull(),
-            'nombre' => $this->faker->unique()->words($nb = 3, $asText = true),
+            'codigo' => $this->faker->unique()->randomNumber($nbDigits = NULL, $strict = false),
+            'nombre' => $this->faker->unique()->words($nb = 10, $asText = true),
             'descripcion' => $this->faker->text($maxNbChars = 200),
             'stock' => rand(0, 200),
+            'precio' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 6),
             'imagen_portada' => $url,// $this->faker->imageUrl($width = 640, $height = 480),
             'alt_imagen_portada' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
         ];
