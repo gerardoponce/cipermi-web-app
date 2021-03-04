@@ -27,6 +27,22 @@ Route::post('/admin/productos', [ProductController::class, 'store'])
             ->middleware('auth')
             ->name('admin.product.store');
 
+Route::get('/admin/productos/{product:codigo}', [ProductController::class, 'show'])
+            ->middleware('auth')
+            ->name('admin.product.show');
+
+Route::get('/admin/productos/{product:codigo}/edit', [ProductController::class, 'edit'])
+            ->middleware('auth')
+            ->name('admin.product.edit');
+
+Route::put('/admin/productos/{product:codigo}', [ProductController::class, 'update'])
+            ->middleware('auth')
+            ->name('admin.product.update');
+
+Route::delete('/admin/productos/{product:codigo}', [ProductController::class, 'destroy'])
+            ->middleware('auth')
+            ->name('admin.product.destroy');
+
 require __DIR__.'/auth.php';
 
 require __DIR__.'/guest.php';

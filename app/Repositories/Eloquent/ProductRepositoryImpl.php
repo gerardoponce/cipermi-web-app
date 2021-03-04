@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\ProductRepositoryIntf;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductRepositoryIntf
 {
@@ -55,15 +56,66 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $perPage): LengthAwarePaginator
+    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $value, $perPage): LengthAwarePaginator
     {
         $products = $this->model
                         ->select('codigo', 'nombre', 'stock', 'precio', 'updated_at')
-                        ->where('codigo', 'LIKE', "%{$search}%")
-                        ->orWhere('nombre', 'LIKE', "%{$search}%")
+                        ->addSelect(DB::raw('(stock * precio) AS precio_total'))
+                        ->where([
+                            ['stock', "$value", '0'],
+                            ['codigo', 'LIKE', "%{$search}%"],
+                        ])
+                        ->orWhere([
+                            ['stock', "$value", '0'],
+                            ['nombre', 'LIKE', "%{$search}%"],
+                        ])
                         ->orderBy('codigo', 'asc')
                         ->paginate($perPage);
 
         return $products;
+    }
+
+    /**
+     * Count products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function countIfPrecioCero()
+    {
+        $count = $this->model
+                        ->where('stock', '=', '0')
+                        ->count();
+
+        return $count;
+    }
+
+    /**
+     * Show a product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function findByCodigo($codigo): Product
+    {
+        $product = $this->model
+                        ->where('codigo', '=', $codigo)
+                        ->first();
+
+        return $product;
+    }
+
+    /**
+     * Show a product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function findByCodigoAllAddPrecioTotal($codigo): Product
+    {
+        $product = $this->model
+                        ->select('*')
+                        ->addSelect(DB::raw('(stock * precio) AS precio_total'))
+                        ->where('codigo', '=', $codigo)
+                        ->first();
+
+        return $product;
     }
 }

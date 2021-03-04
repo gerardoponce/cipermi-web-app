@@ -35,6 +35,7 @@ class UpdateProductRequest extends FormRequest
             ],
             'descripcion' => 'nullable|string',
             'stock' => 'required|numeric|min:0',
+            'precio' => 'required|numeric|between:0,9999.99',
             'imagen_portada' => [
                 'nullable', 'image:jpeg,png,jpg,gif,svg', 'max:2048'
             ],

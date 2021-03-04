@@ -69,12 +69,6 @@ $opciones = [
                         Iniciar sesión
                     </button>
                 </a>
-
-                <a href="{{ route('login') }}" class="sm:hidden text-xs md:text-sm lg:text-base">
-                    <button class="bg-white-1 border-2 border-l-blue-3 text-l-blue-3 rounded-md w-40 py-2 my-4 flex-grow transition duration-500 ease select-none focus:bg-orange-2 focus:text-white-1 focus:border-orange-2 focus:outline-none focus:shadow-outline">
-                        Buscar
-                    </button>
-                </a>
             </div>
 
         </div>

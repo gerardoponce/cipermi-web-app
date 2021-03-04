@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Product;
 use App\Repositories\Interfaces\ProductRepositoryIntf;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,7 +64,7 @@ class ProductController extends Controller
 
         $customRequest['imagen_portada'] = $url;
 
-        $productJson = $this->productRepository->create($customRequest);
+        $this->productRepository->create($customRequest);
         
         return redirect()->route('admin.product.index')->with('status', 'Producto agregado');
     }
@@ -76,7 +77,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product = $this->productRepository->findByCodigoAllAddPrecioTotal($product->codigo);
+
+        return view('admin.product.show', compact('product'));
     }
 
     /**
@@ -87,7 +90,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', compact('product'));
     }
 
     /**
@@ -97,9 +100,45 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $folder = 'img/products';
+        $url = '';
+        $customRequest = $request->all();
+
+        if ($request->hasFile('imagen_portada')) {
+
+            // Upload image
+            $image = $request->file('imagen_portada');
+
+            $image_path = $image->store($folder, 'public');
+
+            $url = Storage::disk('public')->url($image_path);
+
+            Storage::disk('public')->delete($product->imagen_portada);
+
+            $customRequest['imagen_portada'] = $url;
+        }
+        else {
+
+            $url = $product->imagen_portada;
+            $customRequest['imagen_portada'] = $url;
+        }
+
+        $this->productRepository->update($customRequest, $product);
+        
+        return redirect()->route('admin.product.index')->with('status', "Producto actualizado, código: {$customRequest['codigo']}");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function deactivate(Product $product)
+    {
+
     }
 
     /**
@@ -110,6 +149,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $this->productRepository->delete($product);
+
+        return redirect()->route('admin.product.index')->with('status', 'Producto eliminado');
     }
 }

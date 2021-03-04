@@ -1,4 +1,5 @@
 <x-app-layout>
+    
     @if(session()->get('status'))
         <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500 my-2 mx-6">
             <span class="inline-block align-middle mr-8">
@@ -9,6 +10,7 @@
             </button>
         </div>
     @endif
+
     @if ($errors->any())
     <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 my-2 mx-6">
         <ul>
@@ -21,12 +23,10 @@
     <!-- modal div -->
     <section class="mt-6 mx-6" x-data="{ open: false }">
 
-        <!-- Button (blue), duh! -->
-        <button class="px-4 py-2 text-white-1 bg-l-blue-3 rounded select-none no-outline focus:shadow-outline" @click="open = true">
+        <button class="mx-2 md:mx-7 px-4 py-2 text-white-1 bg-l-blue-3 rounded select-none no-outline focus:shadow-outline" @click="open = true">
             Agregar producto
         </button>
 
-        <!-- Dialog (full screen) -->
         <div class="absolute z-50 top-0 left-0 right-0 flex items-center justify-center sm:w-full sm:h-full bg-gray-400" x-show="open">
             <div class="relative py-3 sm:max-w-xl sm:mx-auto" @click.away="open = false">
                 <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">

@@ -18,4 +18,9 @@
     .snap > div {
         scroll-snap-align: center;
     }
+
+    input[type="search"]::-webkit-search-cancel-button {
+        display: none;
+    }
+    
 }

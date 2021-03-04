@@ -45,7 +45,7 @@ class CrudInterfaceImpl implements CrudInterface
         return $model->update($data);
     }
 
-    public function delete(Model $model): bool
+    public function delete(Model $model)
     {
         return $model->delete($model);
     }
