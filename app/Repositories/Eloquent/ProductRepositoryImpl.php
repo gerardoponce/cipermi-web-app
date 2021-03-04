@@ -28,10 +28,11 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
      *
      * @return \Illuminate\Http\Response
      */
-    public function getNombreImagen(): Collection
+    public function getNombreImagenConfirmedImagenPortada(): Collection
     {
         $products = $this->model
                         ->select('nombre', 'imagen_portada', 'alt_imagen_portada')
+                        ->where('producto_portada', '=', TRUE)
                         ->get();
 
         return $products;
@@ -42,10 +43,11 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
      *
      * @return \Illuminate\Http\Response
      */
-    public function getNombreDescripcionImagen(): Collection
+    public function getNombreDescripcionImagenConfirmedImagenPortada(): Collection
     {
         $products = $this->model
                         ->select('nombre', 'descripcion', 'imagen_portada', 'alt_imagen_portada')
+                        ->where('producto_portada', '=', TRUE)
                         ->get();
 
         return $products;
@@ -56,7 +58,7 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $value, $perPage): LengthAwarePaginator
+    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $value, $portada, $perPage): LengthAwarePaginator
     {
         $products = $this->model
                         ->select('codigo', 'nombre', 'stock', 'precio', 'updated_at')
@@ -64,10 +66,12 @@ class ProductRepositoryImpl extends CrudInterfaceImpl implements ProductReposito
                         ->where([
                             ['stock', "$value", '0'],
                             ['codigo', 'LIKE', "%{$search}%"],
+                            ['producto_portada', 'LIKE', "%{$portada}%"],
                         ])
                         ->orWhere([
                             ['stock', "$value", '0'],
                             ['nombre', 'LIKE', "%{$search}%"],
+                            ['producto_portada', 'LIKE', "%{$portada}%"],
                         ])
                         ->orderBy('codigo', 'asc')
                         ->paginate($perPage);

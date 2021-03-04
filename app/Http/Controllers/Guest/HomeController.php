@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function getHome()
     {
         $servicios = $this->serviceRepository->getNombreIcono();
-        $productos = $this->productRepository->getNombreImagen();
+        $productos = $this->productRepository->getNombreImagenConfirmedImagenPortada();
 
         return view('guest.home', compact('servicios', 'productos'));
     }
@@ -75,7 +75,7 @@ class HomeController extends Controller
      */
     public function getProductos()
     {
-        $productos = $this->productRepository->getNombreDescripcionImagen();
+        $productos = $this->productRepository->getNombreDescripcionImagenConfirmedImagenPortada();
 
         return view('guest.productos', compact('productos'));
     }

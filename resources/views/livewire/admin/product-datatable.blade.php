@@ -14,11 +14,18 @@
             </select>
 
             <label class="inline-flex items-center mx-1">
-                <input type="checkbox" class="form-checkbox h-5 w-5 text-orange-600" wire:click="filterStock" id="checkBox">
+                <input type="checkbox" class="form-checkbox h-5 w-5 text-orange-600" wire:click="filterStock" id="checkBoxStock">
                 <script>
-                    document.getElementById('checkBox').checked=false;
+                    document.getElementById('checkBoxStock').checked=false;
                 </script>
                 <span class="ml-2 text-gray-700">Stock en 0</span>
+            </label>
+            <label class="inline-flex items-center mx-1">
+                <input type="checkbox" class="form-checkbox h-5 w-5 text-orange-600" wire:click="filterPortada" id="checkBoxPortada">
+                <script>
+                    document.getElementById('checkBoxPortada').checked=false;
+                </script>
+                <span class="ml-2 text-gray-700">Productos en portada</span>
             </label>
         </div>
 
@@ -33,7 +40,7 @@
     </div>
 
     <div class="block overflow-x-auto mx-6" x-data="{ open: false }">
-        <table class="w-full text-left rounded-lg text-center">
+        <table class="w-full rounded-lg text-center">
             <thead>
                 <tr class="text-gray-800 border border-b-0">
                     <th class="px-4 py-3">Código</th>

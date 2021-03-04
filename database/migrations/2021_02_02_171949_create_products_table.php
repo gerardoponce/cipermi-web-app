@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->decimal('precio', $precision = 6, $scale = 2);
             $table->string('imagen_portada')->nullable();//->unique();
             $table->string('alt_imagen_portada')->nullable();
+            $table->boolean('producto_portada');
             $table->timestamps();
         });
     }

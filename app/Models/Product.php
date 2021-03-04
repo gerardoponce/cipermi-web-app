@@ -21,7 +21,8 @@ class Product extends Model
         'stock',
         'precio',
         'imagen_portada',
-        'alt_imagen_portada'
+        'alt_imagen_portada',
+        'producto_portada'
     ];
     
 }

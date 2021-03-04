@@ -8,11 +8,11 @@ use Illuminate\Support\Collection;
 
 interface ProductRepositoryIntf
 {
-    public function getNombreImagen(): Collection;
+    public function getNombreImagenConfirmedImagenPortada(): Collection;
 
-    public function getNombreDescripcionImagen(): Collection;
+    public function getNombreDescripcionImagenConfirmedImagenPortada(): Collection;
 
-    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $stock, $perPage): LengthAwarePaginator;
+    public function getCodigoNombreStockPrecioFechaActualizacionWhere($search, $value, $portada, $perPage): LengthAwarePaginator;
 
     public function countIfPrecioCero();
 

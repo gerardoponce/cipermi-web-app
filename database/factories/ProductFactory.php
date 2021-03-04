@@ -34,6 +34,7 @@ class ProductFactory extends Factory
             'precio' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 6),
             'imagen_portada' => $url,// $this->faker->imageUrl($width = 640, $height = 480),
             'alt_imagen_portada' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'producto_portada' => $this->faker->boolean($chanceOfGettingTrue = 0),
         ];
     }
 }

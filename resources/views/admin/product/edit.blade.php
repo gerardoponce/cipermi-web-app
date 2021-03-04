@@ -1,5 +1,13 @@
 <x-app-layout>
-
+    @if ($errors->any())
+    <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 my-2 mx-6">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li class="capitalize">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <section class="mt-6 mx-6 flex flex-wrap justify-around">
             <div class="py-3 sm:max-w-xl">
                 <div class="px-4 py-10 bg-gray-100 mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
@@ -51,9 +59,23 @@
                                             </div>
                                         </div>
                                         <div class="flex flex-col">
-                                            <label class="leading-loose" for="alt_imagen_portada">Texto alternatvo de la imagen</label>
-                                            <textarea class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" rows="3" id="alt_imagen_portada" name="alt_imagen_portada">{{ $product->alt_imagen_portada }}</textarea>
+                                            <label class="leading-loose">Producto en portada:</label>
+                                            <select class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" name="producto_portada">
+                                                @if ($product->producto_portada == True)
+                                                    <option value="1" selected='selected'>Sí</option>
+                                                    <option value="0">No</option>  
+                                                @else
+                                                    <option value="1">Sí</option>
+                                                    <option value="0" selected='selected'>No</option>  
+                                                @endif
+
+                                            </select>
+
                                         </div>
+                                    </div>
+                                    <div class="pt-4 flex items-center flex-wrap">
+                                        <label class="leading-loose" for="alt_imagen_portada">Texto alternativo de la imagen</label>
+                                        <textarea class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" rows="3" id="alt_imagen_portada" name="alt_imagen_portada">{{ $product->alt_imagen_portada }}</textarea>
                                     </div>
                                 </div>
                                 <div class="pt-4 flex items-center space-x-4">

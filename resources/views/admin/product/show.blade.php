@@ -87,7 +87,9 @@
                 <div class="max-w-md">
                     <div class="flex flex-col">
                         <h3 class="leading-loose">Producto en portada del sitio web</h3>
-                        <p class="px-4 py-2 border w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600 bg-gray-200">{{ $product->precio_total }}</p>
+                        <p class="px-4 py-2 border w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600 bg-gray-200">
+                            @if($product->producto_portada == True ) Sí @else No @endif
+                        </p>
                     </div>
                 </div>
              </div>

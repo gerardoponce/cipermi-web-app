@@ -10,7 +10,10 @@ $opciones = [
 @endphp
 <header class="lg:relative">
 
-    <div class="hidden lg:block" x-data="{items: ['http://localhost:8000/storage/img/app/logo-1.jpg','http://localhost:8000/storage/img/app/logo-2.jpg'], active: 0}">
+    <div class="hidden lg:block" x-data="{items: [
+        'http://localhost:8000/storage/img/app/image-1920x1080-1.png',
+        'http://localhost:8000/storage/img/app/image-1920x1080-2.png',
+        'http://localhost:8000/storage/img/app/image-1920x1080-3.png'], active: 0}">
         <div class="snap overflow-auto relative flex-no-wrap flex transition-all" x-ref="slider"
             x-on:scroll.debounce="active = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / items.length))">
             <template x-for="(item,index) in items" :key="index">
@@ -117,7 +120,10 @@ $opciones = [
         </div>
     </nav>
 
-    <div class="lg:hidden" x-data="{items: ['storage/img/app/logo-1.jpg','storage/img/app/logo-2.jpg'], active: 0}">
+    <div class="lg:hidden" x-data="{items: [
+        'http://localhost:8000/storage/img/app/image-1920x1080-1.png',
+        'http://localhost:8000/storage/img/app/image-1920x1080-2.png',
+        'http://localhost:8000/storage/img/app/image-1920x1080-3.png'], active: 0}">
         <div class="snap overflow-auto relative flex-no-wrap flex transition-all" x-ref="slider"
             x-on:scroll.debounce="active = Math.round($event.target.scrollLeft / ($event.target.scrollWidth / items.length))">
             <template x-for="(item,index) in items" :key="index">

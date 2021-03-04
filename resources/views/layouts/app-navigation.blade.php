@@ -26,6 +26,13 @@ $opciones = [
                             </x-nav-link>
                         </div>
                     @endforeach
+                    @if (auth()->user()->id == 1)
+                    <div class="hidden sm:flex">
+                        <x-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
+                            {{ 'Usuarios' }}
+                        </x-nav-link>
+                    </div>
+                    @endif
 
                     @auth
                         <a href="{{ route('inicio') }}" class="hidden sm:flex text-xs md:text-sm lg:text-base">

@@ -66,7 +66,7 @@ $ubicaciones = [
                         </svg>
                     </div>
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=51957524882&text=Hola que tal?, tengo una consulta">
+                <a href="https://api.whatsapp.com/send?phone=51990500014&text=Hola que tal?, tengo una consulta">
                     <div class="h-8 w-8 md:h-12 md:w-12 mx-2 flex items-center justify-center">
                         <?xml version="1.0" ?>
                         <svg id="Layer_1" style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

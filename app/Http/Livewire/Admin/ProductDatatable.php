@@ -26,6 +26,7 @@ class ProductDatatable extends Component
     public Product $productDto;
     public $codigo;
     public $countAux = '>=';
+    public $portada = '';
 
     public $codigoProduct;
     public $nombreProduct;
@@ -58,7 +59,7 @@ class ProductDatatable extends Component
     public function render()
     {
         return view('livewire.admin.product-datatable', [
-            'products' => $this->getRepository()->getCodigoNombreStockPrecioFechaActualizacionWhere($this->search, $this->countAux, $this->perPage),
+            'products' => $this->getRepository()->getCodigoNombreStockPrecioFechaActualizacionWhere($this->search, $this->countAux, $this->portada, $this->perPage),
             'count' => $this->getRepository()->countIfPrecioCero(),
         ]);
     }
@@ -67,9 +68,23 @@ class ProductDatatable extends Component
     {
         if ($this->countAux == '=') {
             $this->countAux = '>=';
+            $this->page = 1;
         }
         else {
             $this->countAux = '=';
+            $this->page = 1;
+        }
+    }
+
+    public function filterPortada()
+    {
+        if ($this->portada == '') {
+            $this->portada = '1';
+            $this->page = 1;
+        }
+        else {
+            $this->portada = '';
+            $this->page = 1;
         }
     }
 
